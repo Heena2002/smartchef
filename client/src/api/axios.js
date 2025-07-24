@@ -1,20 +1,20 @@
 import axios from 'axios';
 
-// Create Axios instance
+// ✅ Use deployed backend URL
 const instance = axios.create({
-  baseURL: 'http://localhost:4002', // Backend URL
+  baseURL: 'https://smartchef-zj41.onrender.com', // 🌐 Live backend
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
 });
 
-// Automatically attach token to every request
+// 🔐 Attach JWT token for protected routes
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token'); // ✅ Get token from localStorage
+    const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // ✅ Attach token
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
